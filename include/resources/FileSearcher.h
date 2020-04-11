@@ -27,13 +27,12 @@ namespace hpl {
 
 	class iLowLevelResources;
 
-	typedef std::multimap<tString, tString> tFilePathMap;
-	typedef tFilePathMap::iterator tFilePathMapIt;
+
 
 	class cFileSearcher
 	{
 	public:
-		cFileSearcher(iLowLevelResources *apLowLevelResources);
+		cFileSearcher(iLowLevelResources *apLowLevelResources, tWString);
 		~cFileSearcher();
 
 		/**

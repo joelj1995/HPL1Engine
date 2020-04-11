@@ -30,9 +30,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cFileSearcher::cFileSearcher(iLowLevelResources *apLowLevelResources)
+	cFileSearcher::cFileSearcher(iLowLevelResources *apLowLevelResources, tWString assetsPath)
 	{
 		mpLowLevelResources = apLowLevelResources;
+		mpLowLevelResources->FindFilesInDirRecursive(m_mapFiles, assetsPath);
 	}
 
 	//-----------------------------------------------------------------------
@@ -51,33 +52,12 @@ namespace hpl {
 
 	void cFileSearcher::AddDirectory(tString asPath, tString asMask)
 	{
-		tWStringList lstFileNames;
-		//Make the path with only "/" and lower case.
-		asPath = cString::ToLowerCase(cString::ReplaceCharTo(asPath,"\\","/"));
-
-		tStringSetIt it = m_setLoadedDirs.find(asPath);
-		//If the path is not allready added, add it!
-		if(it==m_setLoadedDirs.end())
-		{
-			m_setLoadedDirs.insert(asPath);
-
-			mpLowLevelResources->FindFilesInDir(lstFileNames,cString::To16Char(asPath),
-												cString::To16Char(asMask));
-
-			for(tWStringListIt it = lstFileNames.begin();it!=lstFileNames.end();it++)
-			{
-				tString sFile = cString::To8Char(*it);
-				m_mapFiles.insert(tFilePathMap::value_type(
-													cString::ToLowerCase(sFile),
-													cString::SetFilePath(sFile,asPath)));
-			}
-		}
+		return;
 	}
 
 	void cFileSearcher::ClearDirectories()
 	{
-		m_mapFiles.clear();
-		m_setLoadedDirs.clear();
+		return;
 	}
 
 	//-----------------------------------------------------------------------
