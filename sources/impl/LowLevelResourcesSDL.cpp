@@ -17,13 +17,14 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #ifdef WIN32
-#pragma comment(lib, "SDL_image.lib")
+#pragma comment(lib, "SDL2_image.lib")
 #endif
 
 #include "impl/LowLevelResourcesSDL.h"
 #include "impl/SDLBitmap2D.h"
 #include "impl/MeshLoaderMSH.h"
 #include "impl/MeshLoaderCollada.h"
+#include "impl/MeshLoaderMap.h"
 #ifdef INCLUDE_THEORA
 #include "impl/VideoStreamTheora.h"
 #endif
@@ -135,6 +136,7 @@ namespace hpl {
 		//apHandler->AddLoader(hplNew( cMeshLoaderFBX,(mpLowLevelGraphics)));
 		apHandler->AddLoader(hplNew( cMeshLoaderMSH,(mpLowLevelGraphics)));
 		apHandler->AddLoader(hplNew( cMeshLoaderCollada,(mpLowLevelGraphics)));
+		apHandler->AddLoader(hplNew( cMeshLoaderMap, (mpLowLevelGraphics)));
 	}
 
 	//-----------------------------------------------------------------------
