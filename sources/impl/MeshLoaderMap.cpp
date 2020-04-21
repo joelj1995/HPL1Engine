@@ -1,3 +1,5 @@
+#include "graphics/Mesh.h"
+
 #include "impl/MeshLoaderMap.h"
 
 #include "physics/Physics.h"
@@ -246,9 +248,12 @@ namespace hpl {
 				Error("Error loading external mesh entity %s!", fileName);
 			else
 			{
-				
 				cMatrixf transform = CreateTransformMatrix(staticObject.worldPosition, staticObject.rotation, staticObject.scale);
-				world->CreateEntity(staticObject.name, transform, fileName, false);
+				cMeshEntity* pEntity = world->CreateMeshEntity(staticObject.name, pMesh, true);
+				iCollideShape* pShape = pMesh->CreateCollideShape(world->GetPhysicsWorld());
+				iPhysicsBody* pBody = world->GetPhysicsWorld()->CreateBody(staticObject.name, pShape);
+				world->CreateColliderEntity(staticObject.name, pBody);
+				pEntity->SetMatrix(transform);
 			}
 		}
 	}
