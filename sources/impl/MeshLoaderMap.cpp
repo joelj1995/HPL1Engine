@@ -252,6 +252,7 @@ namespace hpl {
 				cMeshEntity* pEntity = world->CreateMeshEntity(staticObject.name, pMesh, true);
 				iCollideShape* pShape = pMesh->CreateCollideShape(world->GetPhysicsWorld());
 				iPhysicsBody* pBody = world->GetPhysicsWorld()->CreateBody(staticObject.name, pShape);
+				pBody->SetWorldMatrix(transform);
 				world->CreateColliderEntity(staticObject.name, pBody);
 				pEntity->SetMatrix(transform);
 			}
