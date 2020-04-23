@@ -254,9 +254,12 @@ namespace hpl {
 				cMatrixf transform = CreateTransformMatrix(staticObject.worldPosition, staticObject.rotation, staticObject.scale);
 				cMeshEntity* pEntity = world->CreateMeshEntity(staticObject.name, pMesh, true);
 				iCollideShape* pShape = pMesh->CreateCollideShape(world->GetPhysicsWorld());
-				iPhysicsBody* pBody = world->GetPhysicsWorld()->CreateBody(staticObject.name, pShape);
-				pBody->SetWorldMatrix(transform);
-				world->CreateColliderEntity(staticObject.name, pBody);
+				if (pShape)
+				{
+					iPhysicsBody* pBody = world->GetPhysicsWorld()->CreateBody(staticObject.name, pShape);
+					pBody->SetWorldMatrix(transform);
+					world->CreateColliderEntity(staticObject.name, pBody);
+				}
 				pEntity->SetMatrix(transform);
 			}
 		}
