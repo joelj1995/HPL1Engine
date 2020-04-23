@@ -74,7 +74,7 @@ namespace hpl {
 
 		pWorld->SetUpData();
 
-		return pWorld;
+ 		return pWorld;
 	}
 
 	bool cMeshLoaderMap::IsSupported(const tString asFileType)
@@ -207,7 +207,10 @@ namespace hpl {
 			while (areaElem)
 			{
 				if (cString::ToString(areaElem->Attribute("AreaType"), "") != "PlayerStart")
+				{
+					areaElem = areaElem->NextSiblingElement("Area");
 					continue;
+				}
 
 				Area areaEntity;
 
