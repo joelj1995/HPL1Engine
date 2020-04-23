@@ -90,7 +90,7 @@ namespace hpl {
 	{
 		for (int i = 0; i < index.size(); i++)
 			if (index[i].msId == id)
-				return index[i].msPath;
+				return cString::GetFileName(index[i].msPath);
 		return "";
 	}
 
