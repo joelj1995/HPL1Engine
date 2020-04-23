@@ -749,7 +749,13 @@ namespace hpl {
 
 			/////////////////////////////
 			//Add material
-			tString sMatName = GetMaterialTextureFile(Geom.msMaterial,vColladaMaterials,vColladaTextures,
+			tString materialName = Geom.msMaterial;
+			tColladaBoundMaterialsList::iterator it = pNode->boundMaterials.find(Geom.msMaterial);
+			if (it != pNode->boundMaterials.end())
+			{
+				materialName = cString::Sub(pNode->boundMaterials[Geom.msMaterial],1,-1);
+			}
+			tString sMatName = GetMaterialTextureFile(materialName,vColladaMaterials,vColladaTextures,
 														vColladaImages);
 			//Log("Material name: '%s'\n",sMatName.c_str());
 			iMaterial *pMaterial;

@@ -337,6 +337,14 @@ namespace hpl {
 	typedef std::list<cColladaNode*> tColladaNodeList;
 	typedef tColladaNodeList::iterator tColladaNodeListIt;
 
+	class cColladaBoundMaterial
+	{
+	public:
+		tString symbol;
+		tString target;
+	};
+	typedef std::map<tString, tString> tColladaBoundMaterialsList;
+
 	class cColladaNode
 	{
 	public:
@@ -361,6 +369,8 @@ namespace hpl {
 		tColladaNodeList mlstChildren;
 
 		tColladaTransformList mlstTransforms;
+
+		tColladaBoundMaterialsList boundMaterials;
 
 		/*void DeleteChildren()
 		{
