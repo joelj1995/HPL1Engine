@@ -236,7 +236,7 @@ namespace hpl {
 			FatalError("Could not create surface for DDS texture");
 
 		int8_t* pixels = (int8_t*) image->pixels;
-		for (int h = 0; h < height / 4; h++)
+		/*for (int h = 0; h < height / 4; h++)
 		{
 			for (int w = 0; w < width / 4; w++)
 			{
@@ -259,7 +259,7 @@ namespace hpl {
 
 				offset += 8;
 			}
-		}
+		}*/
 
 		SDL_RWclose(src);
 

@@ -41,7 +41,7 @@ namespace hpl {
 		cMaterialType_Diffuse();
 
 		bool IsCorrect(tString asName){
-			return cString::ToLowerCase(asName)=="diffuse";
+			return cString::ToLowerCase(asName)=="diffuse" || cString::ToLowerCase(asName) == "soliddiffuse";
 		}
 
 		iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
