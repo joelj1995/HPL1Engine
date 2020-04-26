@@ -809,6 +809,20 @@ namespace hpl {
 			GetAdress(sSource);
 
 			pNode->msSource = sSource;
+
+			TiXmlElement* bindMaterialElem = pInstanceElem->FirstChildElement("bind_material");
+			if (bindMaterialElem)
+			{
+				TiXmlElement* techniqueCommonElem = bindMaterialElem->FirstChildElement("technique_common");
+				if (techniqueCommonElem)
+				{
+					TiXmlElement* instanceMaterialElem = techniqueCommonElem->FirstChildElement("instance_material");
+					cColladaBoundMaterial boundMaterial;
+					tString symbol = instanceMaterialElem->Attribute("symbol");
+					tString target = instanceMaterialElem->Attribute("target");
+					pNode->boundMaterials[symbol] = target;
+				}
+			}
 		}
 
 		//Log("Node. %s, type: %s\n",pNode->msId.c_str(),pNode->msType.c_str());

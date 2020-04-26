@@ -1,3 +1,5 @@
+#include "graphics/Mesh.h"
+
 #include "impl/MeshLoaderMap.h"
 
 #include "physics/Physics.h"
@@ -72,7 +74,7 @@ namespace hpl {
 
 		pWorld->SetUpData();
 
-		return pWorld;
+ 		return pWorld;
 	}
 
 	bool cMeshLoaderMap::IsSupported(const tString asFileType)
@@ -88,7 +90,7 @@ namespace hpl {
 	{
 		for (int i = 0; i < index.size(); i++)
 			if (index[i].msId == id)
-				return index[i].msPath;
+				return cString::GetFileName(index[i].msPath);
 		return "";
 	}
 
@@ -205,7 +207,10 @@ namespace hpl {
 			while (areaElem)
 			{
 				if (cString::ToString(areaElem->Attribute("AreaType"), "") != "PlayerStart")
+				{
+					areaElem = areaElem->NextSiblingElement("Area");
 					continue;
+				}
 
 				Area areaEntity;
 
@@ -246,9 +251,16 @@ namespace hpl {
 				Error("Error loading external mesh entity %s!", fileName);
 			else
 			{
-				
 				cMatrixf transform = CreateTransformMatrix(staticObject.worldPosition, staticObject.rotation, staticObject.scale);
-				world->CreateEntity(staticObject.name, transform, fileName, false);
+				cMeshEntity* pEntity = world->CreateMeshEntity(staticObject.name, pMesh, true);
+				iCollideShape* pShape = pMesh->CreateCollideShape(world->GetPhysicsWorld());
+				if (pShape)
+				{
+					iPhysicsBody* pBody = world->GetPhysicsWorld()->CreateBody(staticObject.name, pShape);
+					pBody->SetWorldMatrix(transform);
+					world->CreateColliderEntity(staticObject.name, pBody);
+				}
+				pEntity->SetMatrix(transform);
 			}
 		}
 	}

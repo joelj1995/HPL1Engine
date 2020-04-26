@@ -41,6 +41,8 @@ namespace hpl {
 		void AddVideoLoaders(cVideoManager* apManager);
 
 	private:
+        SDL_Surface* DDS_Load(const char* file);
+
 		tString mvImageFormats[30];
 		cLowLevelGraphicsSDL *mpLowLevelGraphics;
 	};

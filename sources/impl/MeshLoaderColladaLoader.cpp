@@ -58,6 +58,7 @@ namespace hpl {
 		tColladaAnimationVec *apColladaAnimVec,
 		cColladaScene *apColladaScene,bool abCache)
 	{
+		abCache = false;
 		bool bLoadCache =false;
 		//abCache = false;
 		//Log("Loading %s\n",asFile.c_str());
